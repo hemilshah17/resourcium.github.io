@@ -1,0 +1,107 @@
+
+
+<!DOCTYPE html>
+<html lang="en-gb">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="description" content="UCL Resourcium | System Design">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>System Design</title>
+    <link href="&#x2F;vendor&#x2F;fontawesome-free&#x2F;css&#x2F;all.min.css" rel="stylesheet" type="text/css">
+    <link href="&#x2F;vendor&#x2F;bootstrap&#x2F;css&#x2F;bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="&#x2F;styles&#x2F;clean-blog.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="">Project Analysis</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="&#x2F;requirements&#x2F;">Requirements</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="&#x2F;research&#x2F;">Research</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="&#x2F;uidesign&#x2F;">UI/UX Design</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="&#x2F;systemdesign&#x2F;">System Design</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <header class="masthead" style="background-image: url('&#x2F;images&#x2F;home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>System Design</h1>
+            <span class="subheading">Team 29</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="container">
+      <h2 id="system-architecture-diagram">System architecture diagram</h2>
+<p>The section introduces the design of the web application. In simple terms, our system uses a typical client-server based system but what makes it different is the
+idea of a serverless backend, which requires something known as azure functions to make the calls.</p>
+<p>The view the user sees is all directly from the client-side. To simplify, when a user logs in, the view that is displayed is dependent upon their settings where this data is stored
+as Blob storage within Azure.
+Before these serverless calls can be made, users need to be authenticated via Microsoft and then they are redirected to their homepage.</p>
+<p>For example, if the user has twitch and twitter enabled within their settings, then they will be able to view them both from the homepage. Again, this makes use
+of a serverless function which calls the Blob storage to retrieve this data.</p>
+<p>User interactions are captured via the clicks which is used to eventually render the pages that they see. The main logic of the app with regards to rendering of the different pages is in the App.js file.
+Since we are using React, it is a single page application and all the pages are split into components which uses a &quot;Router&quot; to access these different pages/components.</p>
+<p>User changes with regards to settings is updated when the user saves their new settings to the database, which is directly used in every page to render the appropriate view.</p>
+<p>When the user wants to access resources, they can search via the application which essentially calls an API in order to retrieve data and display results according to the user search. The MS Learn
+API does not have a built-in filter for the resources it provides, hence the system has been setup to cache the data for session storage in order to minimise API calls.</p>
+<p>The chatbot is a simple embed which automatically handles user requests and responses internally/by itself.</p>
+<p>With regards to the forms section of the app, they are very simply links to Microsoft Forms that students fill out. The processing that happens after the form is submitted is independent of 
+the app itself. What happens is a Microsoft Flow automates data to a Sharepoint list and PowerBi, this in turn produces real time streaming data in order to generate a dashboard to be viewed by staff
+in a Sharepoint site. This flow also triggers an email to the person who filled out the &quot;Additional Help&quot; form to acknowledge their request.</p>
+<h2 id="sitemap-diagram">Sitemap Diagram</h2>
+<p><img src="./sitemap.png" alt="sitemap" /></p>
+
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="&#x2F;vendor&#x2F;jquery&#x2F;jquery.min.js"></script>
+    <script src="&#x2F;vendor&#x2F;bootstrap&#x2F;js&#x2F;bootstrap.bundle.min.js"></script>
+    <script src="&#x2F;scripts&#x2F;clean-blog.min.js"></script>
+  </body>
+</html>
